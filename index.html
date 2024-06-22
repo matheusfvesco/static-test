@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages with JSON</title>
+</head>
+<body>
+    <h1>Content from JSON</h1>
+    <div id="content"></div>
+
+    <script>
+        // Function to fetch and display JSON data
+        async function loadJSON() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+                const contentDiv = document.getElementById('content');
+
+                // Assume data.json contains an array of objects
+                data.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.innerHTML = `<h2>${item.title}</h2><p>${item.content}</p>`;
+                    contentDiv.appendChild(itemDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching JSON data:', error);
+            }
+        }
+
+        // Load JSON data when the page loads
+        window.onload = loadJSON;
+    </script>
+</body>
+</html>
